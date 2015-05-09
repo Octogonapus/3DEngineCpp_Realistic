@@ -25,7 +25,9 @@ void PhysicsObject::Simulate(float delta)
 	}
 	else
 	{
-		m_entity->GetTransform()->SetPos(*m_entity->GetTransform()->GetPos() + (m_velocity + (m_accel / 2) * delta) * delta);
-		m_velocity += m_accel * delta;
+
 	}
+
+	//Calculate torsion
+	m_torsion = m_velocity.Cross(m_accel).Dot((m_oldAccel - m_accel) / delta) / pow(m_velocity.Cross(m_accel).Length(), 2);
 }
